@@ -1,11 +1,17 @@
 import { Video } from "@/lib/api";
+import { Link } from "react-router-dom";
 
 export const VideoCard = ({ video }: { video: Video }) => {
+  const videoId = video.url.split("v=")[1] || "";
+
   return (
-    <div className="group cursor-pointer transition-transform duration-200 hover:-translate-y-1">
+    <Link 
+      to={`/player/${videoId}`} 
+      className="group cursor-pointer transition-transform duration-200 hover:-translate-y-1"
+    >
       <div className="aspect-video rounded-lg overflow-hidden mb-3">
         <img
-          src="/lovable-uploads/539de762-71b5-4183-9e88-1071a8c6ea5c.png"
+          src={video.thumbnail}
           alt={video.title}
           className="w-full h-full object-cover"
         />
@@ -28,6 +34,6 @@ export const VideoCard = ({ video }: { video: Video }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };

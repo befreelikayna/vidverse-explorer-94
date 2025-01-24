@@ -1,11 +1,34 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useQuery } from "@tanstack/react-query";
+import { SearchBar } from "@/components/SearchBar";
+import { VideoGrid } from "@/components/VideoGrid";
+import { searchVideos } from "@/lib/api";
+import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
 
 const Index = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const { toast } = useToast();
+
+  const { data: videos = [], isLoading, error } = useQuery({
+    queryKey: ["videos", searchQuery],
+    queryFn: () => searchVideos(searchQuery),
+  });
+
+  if (error) {
+    toast({
+      variant: "destructive",
+      title: "Error",
+      description: "Failed to load videos. Please try again later.",
+    });
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-gray-950 text-white">
+      <div className="container mx-auto px-4 py-8">
+        <div className="mb-8">
+          <SearchBar onSearch={setSearchQuery} />
+        </div>
+        <VideoGrid videos={videos} isLoading={isLoading} />
       </div>
     </div>
   );

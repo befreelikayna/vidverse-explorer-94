@@ -22,7 +22,7 @@ export const searchVideos = async (query: string = ""): Promise<Video[]> => {
       }
       
       const data = await response.json();
-      return data;
+      return Array.isArray(data) ? data : [];
     } else {
       // Fetch videos from KIMMISO's channel
       const channelId = "UClrGKMnK9lvo83f_vl-O-RQ";
@@ -35,7 +35,7 @@ export const searchVideos = async (query: string = ""): Promise<Video[]> => {
       }
       
       const data = await response.json();
-      return data.relatedStreams;
+      return Array.isArray(data.relatedStreams) ? data.relatedStreams : [];
     }
   } catch (error) {
     console.error('Error fetching videos:', error);

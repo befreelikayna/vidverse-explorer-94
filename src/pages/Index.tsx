@@ -12,6 +12,14 @@ const Index = () => {
   const { data: videos = [], isLoading, error } = useQuery({
     queryKey: ["videos", searchQuery],
     queryFn: () => searchVideos(searchQuery),
+    select: (data) => {
+      // Ensure we always return an array
+      if (!Array.isArray(data)) {
+        console.error("Received non-array data:", data);
+        return [];
+      }
+      return data;
+    },
   });
 
   if (error) {

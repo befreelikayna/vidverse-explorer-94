@@ -11,18 +11,32 @@ export interface Video {
 
 export const searchVideos = async (query: string = ""): Promise<Video[]> => {
   try {
-    // Use a default search term when query is empty and always include filter parameter
-    const searchQuery = query.trim() || "music";
-    const response = await fetch(`https://pipedapi.reallyaweso.me/search?q=${encodeURIComponent(searchQuery)}&filter=videos`);
-    
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error('API Error:', errorData);
-      throw new Error('Failed to fetch videos');
+    // If there's a search query, use it, otherwise fetch from the specific channel
+    if (query.trim()) {
+      const response = await fetch(`https://pipedapi.reallyaweso.me/search?q=${encodeURIComponent(query)}&filter=videos`);
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('API Error:', errorData);
+        throw new Error('Failed to fetch videos');
+      }
+      
+      const data = await response.json();
+      return data;
+    } else {
+      // Fetch videos from KIMMISO's channel
+      const channelId = "UClrGKMnK9lvo83f_vl-O-RQ";
+      const response = await fetch(`https://pipedapi.reallyaweso.me/channel/${channelId}`);
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Channel API Error:', errorData);
+        throw new Error('Failed to fetch channel videos');
+      }
+      
+      const data = await response.json();
+      return data.relatedStreams;
     }
-    
-    const data = await response.json();
-    return data;
   } catch (error) {
     console.error('Error fetching videos:', error);
     return [];

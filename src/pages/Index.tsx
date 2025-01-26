@@ -47,7 +47,7 @@ const Index = () => {
             <SearchBar onSearch={setSearchQuery} />
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-lg font-medium text-white">Instagram</span>
+            <span className="text-lg font-medium text-white">Insta</span>
             <Button
               variant="ghost"
               size="icon"

@@ -7,10 +7,12 @@ import { useToast } from "@/components/ui/use-toast";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Instagram } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const { data: videos = [], isLoading, error } = useQuery({
     queryKey: ["videos", searchQuery],
@@ -36,13 +38,17 @@ const Index = () => {
     <div className="min-h-screen bg-gray-950 text-white">
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-3">
+          <Button
+            variant="ghost"
+            className="flex items-center gap-3 hover:bg-gray-900 transition-colors"
+            onClick={() => navigate("/")}
+          >
             <Avatar className="h-12 w-12 border-2 border-blue-500">
               <AvatarImage src="/lovable-uploads/539de762-71b5-4183-9e88-1071a8c6ea5c.png" alt="KIMMISO" />
               <AvatarFallback>KM</AvatarFallback>
             </Avatar>
             <span className="text-xl font-bold text-white">KIMMISO</span>
-          </div>
+          </Button>
           <div className="flex-1 mx-4">
             <SearchBar onSearch={setSearchQuery} />
           </div>

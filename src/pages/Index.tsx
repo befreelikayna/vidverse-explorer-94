@@ -37,7 +37,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gray-950 text-white">
       <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-6">
           <Button
             variant="ghost"
             className="flex items-center gap-3 hover:bg-gray-900 transition-colors"
@@ -49,9 +49,6 @@ const Index = () => {
             </Avatar>
             <span className="text-xl font-bold text-white">KIMMISO</span>
           </Button>
-          <div className="flex-1 mx-4">
-            <SearchBar onSearch={setSearchQuery} />
-          </div>
           <div className="flex items-center gap-2">
             <span className="text-lg font-medium text-white">Insta</span>
             <Button
@@ -68,6 +65,9 @@ const Index = () => {
               </Avatar>
             </Button>
           </div>
+        </div>
+        <div className="mb-8">
+          <SearchBar onSearch={setSearchQuery} />
         </div>
         <VideoGrid videos={videos} isLoading={isLoading} />
       </div>

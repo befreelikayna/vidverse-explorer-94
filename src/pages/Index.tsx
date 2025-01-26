@@ -46,19 +46,22 @@ const Index = () => {
           <div className="flex-1 mx-4">
             <SearchBar onSearch={setSearchQuery} />
           </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="rounded-full"
-            onClick={() => window.open('https://www.instagram.com/kimmiso1194/', '_blank')}
-          >
-            <Avatar className="h-12 w-12 border-2 border-pink-500 hover:border-pink-400 transition-colors">
-              <AvatarImage src="/lovable-uploads/539de762-71b5-4183-9e88-1071a8c6ea5c.png" alt="KIMMISO Instagram" />
-              <AvatarFallback>
-                <Instagram className="h-6 w-6" />
-              </AvatarFallback>
-            </Avatar>
-          </Button>
+          <div className="flex items-center gap-2">
+            <span className="text-lg font-medium text-white">Instagram</span>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="rounded-full"
+              onClick={() => window.open('https://www.instagram.com/kimmiso1194/', '_blank')}
+            >
+              <Avatar className="h-12 w-12 border-2 border-pink-500 hover:border-pink-400 transition-colors">
+                <AvatarImage src="/lovable-uploads/539de762-71b5-4183-9e88-1071a8c6ea5c.png" alt="KIMMISO Instagram" />
+                <AvatarFallback>
+                  <Instagram className="h-6 w-6" />
+                </AvatarFallback>
+              </Avatar>
+            </Button>
+          </div>
         </div>
         <VideoGrid videos={videos} isLoading={isLoading} />
       </div>
